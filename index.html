@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>آموزش پایتون برای مبتدی‌ها</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--c1:#ffd6e8;--c2:#ffb3d1;--c3:#ffe4ef;--accent:#d6336c;--blob:#ff7eb6;
+--text:#4a1d35;--soft:#8a4a68;--glass:rgba(255,255,255,.5);--glass-b:rgba(255,255,255,.75);--code-bg:rgba(60,20,45,.9);--code:#ffe4ef;--veil:transparent}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--text:#ffe9f2;--soft:#f3b5d0;--glass:rgba(30,8,22,.45);--glass-b:rgba(255,255,255,.18);--code-bg:rgba(0,0,0,.5);--veil:rgba(25,6,18,.62)}}
+:root[data-theme="dark"]{--text:#ffe9f2;--soft:#f3b5d0;--glass:rgba(30,8,22,.45);--glass-b:rgba(255,255,255,.18);--code-bg:rgba(0,0,0,.5);--veil:rgba(25,6,18,.62)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Vazirmatn',Tahoma,sans-serif;color:var(--text);line-height:2;min-height:100vh;overflow-x:hidden;
+background:linear-gradient(135deg,var(--c1),var(--c2) 50%,var(--c3));background-attachment:fixed;transition:background .5s}
+body::before{content:"";position:fixed;inset:0;background:var(--veil);pointer-events:none;z-index:0}
+.blob{position:fixed;width:300px;height:300px;border-radius:50%;filter:blur(70px);opacity:.5;background:var(--blob);z-index:0;pointer-events:none;transition:background .5s}
+.b1{top:-80px;right:-80px}.b2{bottom:-80px;left:-80px}
+.glass{background:var(--glass);border:1px solid var(--glass-b);border-radius:22px;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.08)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;max-width:1000px;margin:12px auto;padding:8px 12px;display:flex;gap:4px;align-items:center;overflow-x:auto;white-space:nowrap}
+nav a{color:var(--text);text-decoration:none;font-size:.85rem;padding:2px 11px;border-radius:999px}
+nav a:hover{background:var(--glass-b)}
+nav a.on{background:var(--accent);color:#fff}
+nav .brand{font-weight:800;color:var(--accent);display:flex;align-items:center;gap:6px;margin-inline-end:6px}
+main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 14px 30px}
+.flower{width:120px;height:120px;animation:spin 14s linear infinite;filter:drop-shadow(0 6px 10px rgba(0,0,0,.2))}
+.mini{width:26px;height:26px;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.flower,.mini{animation:none}}
+.slider{position:relative;height:340px;overflow:hidden;margin-bottom:22px}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px 60px;opacity:0;transition:opacity .8s;pointer-events:none}
+.slide.on{opacity:1;pointer-events:auto}
+.slide h1,.slide h2{font-size:1.8rem;margin:8px 0;font-weight:800}
+.slide p{margin:0 0 14px;color:var(--soft)}
+.s1{background:linear-gradient(135deg,rgba(255,126,182,.35),rgba(255,214,232,.2))}
+.s2{background:linear-gradient(135deg,rgba(255,163,131,.4),rgba(255,230,210,.2))}
+.s3{background:linear-gradient(135deg,rgba(177,151,252,.4),rgba(255,214,240,.2))}
+.s4{background:linear-gradient(135deg,rgba(240,101,149,.4),rgba(255,224,200,.2))}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:6px 22px;border-radius:999px;font-size:.95rem}
+.arr{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid var(--glass-b);background:var(--glass-b);color:var(--text);font-size:1.2rem;cursor:pointer}
+.prev{right:12px}.next{left:12px}
+.dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:2}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--glass-b);cursor:pointer}
+.dots i.on{background:var(--accent);width:24px;border-radius:6px}
+.about{padding:22px 26px;text-align:center}
+.page:not(.about){padding:24px 26px}
+h2.t{margin:0 0 8px;color:var(--accent);font-size:1.5rem;font-weight:800}
+p{margin:6px 0}ul{padding-inline-start:22px;margin:6px 0}
+pre{direction:ltr;text-align:left;background:var(--code-bg);color:var(--code);padding:14px 16px;border-radius:14px;overflow-x:auto;font-size:.88rem;line-height:1.7;margin:10px 0}
+code{direction:ltr;unicode-bidi:embed;background:var(--glass-b);padding:1px 7px;border-radius:6px;font-size:.88em}
+pre code{background:none;padding:0}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.92rem}
+th,td{padding:6px 10px;border-bottom:1px solid var(--glass-b);text-align:right}th{color:var(--accent)}
+.pn{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+.pn a{color:var(--accent);text-decoration:none;font-weight:600;background:var(--glass-b);padding:4px 16px;border-radius:999px;font-size:.9rem}
+footer{position:relative;z-index:1;max-width:1000px;margin:10px auto 24px;padding:22px 18px;text-align:center;width:calc(100% - 28px)}
+footer .fl{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin:8px 0}
+footer a{color:var(--text);text-decoration:none;font-size:.88rem}footer a:hover{color:var(--accent)}
+footer small{color:var(--soft)}
+@media(max-width:600px){.slider{height:380px}.slide{padding:20px 52px}.slide h1,.slide h2{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="fl" viewBox="0 0 100 100">
+<g fill="#ff8fbf" stroke="#fff" stroke-width="1" fill-opacity=".92">
+<ellipse cx="50" cy="24" rx="10" ry="20"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(45 50 50)" fill="#ff6fa8"/>
+<ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(90 50 50)"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(135 50 50)" fill="#ff6fa8"/>
+<ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(225 50 50)" fill="#ff6fa8"/>
+<ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(270 50 50)"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(315 50 50)" fill="#ff6fa8"/></g>
+<circle cx="50" cy="50" r="11" fill="#ffd54f" stroke="#fff" stroke-width="1.5"/></symbol></svg>
+<div class="blob b1"></div><div class="blob b2"></div>
+
+<nav class="glass" id="nav">
+<a class="brand" href="#home"><svg class="mini"><use href="#fl"/></svg>پایتون</a>
+</nav>
+
+<main>
+<div id="home" class="page">
+  <div class="slider glass" id="sl">
+    <button class="arr prev" aria-label="قبلی">›</button><button class="arr next" aria-label="بعدی">‹</button>
+    <div class="slide s1 on"><svg class="flower"><use href="#fl"/></svg><h1>پایتون را از صفر یاد بگیر</h1><p>ساده، خوانا و دوست‌داشتنی</p><a class="btn" href="#intro">شروع کنیم</a></div>
+    <div class="slide s2"><h2>نصب در چند دقیقه</h2><p>پایتون را نصب کن و آماده‌ی نوشتن اولین کدت شو</p><a class="btn" href="#install">آموزش نصب</a></div>
+    <div class="slide s3"><h2>با مثال یاد بگیر</h2><p>هر مبحث یک صفحه‌ی جدا با کدهای آماده دارد</p><a class="btn" href="#first">اولین برنامه</a></div>
+    <div class="slide s4"><h2>قدم‌به‌قدم تا شی‌گرایی</h2><p>از متغیر و حلقه تا کلاس و مدیریت خطا</p><a class="btn" href="#loop">حلقه‌ها</a></div>
+    <div class="dots"></div>
+  </div>
+  <section class="about glass">
+    <h2 class="t">اینجا چی یاد می‌گیری؟</h2>
+    <p>یک راهنمای کوتاه و مرتب برای شروع پایتون. از منوی بالا هر مبحث را بزن تا به صفحه‌ی مخصوص خودش بروی؛ هر صفحه رنگ و حال‌وهوای خودش را دارد.</p>
+  </section>
+</div>
+
+<section id="intro" class="page glass" hidden><h2 class="t">پایتون چیست؟</h2>
+<p>پایتون یک زبان برنامه‌نویسی ساده و قدرتمند است که در سال ۱۹۹۱ توسط گیدو ون روسوم ساخته شد. نوشتنش شبیه جمله‌های انگلیسی است و برای شروع عالی است.</p>
+<ul><li>توسعه وب، اتوماسیون و اسکریپت‌نویسی</li><li>تحلیل داده و علم داده</li><li>بازی‌سازی، ابزارهای دسکتاپ و امنیت</li></ul></section>
+
+<section id="install" class="page glass" hidden><h2 class="t">نصب پایتون</h2>
+<ul><li>به سایت python.org بخش Downloads برو و آخرین نسخه را بگیر.</li><li>در ویندوز گزینه <code>Add Python to PATH</code> را تیک بزن.</li><li>برای تست، در ترمینال بنویس:</li></ul>
+<pre><code>python --version</code></pre>
+<p>برای نوشتن کد می‌توانی از IDLE، VS Code یا PyCharm استفاده کنی.</p></section>
+
+<section id="first" class="page glass" hidden><h2 class="t">اولین برنامه</h2>
+<p>تابع <code>print</code> هر چیزی را نمایش می‌دهد و <code>#</code> برای توضیح (کامنت) است.</p>
+<pre><code># اولین برنامه
+print("Hello, World!")
+
+name = input("اسمت چیه؟ ")
+print("سلام", name)</code></pre></section>
+
+<section id="vars" class="page glass" hidden><h2 class="t">متغیرها</h2>
+<p>متغیر یک جعبه‌ی نام‌دار است که مقدار را نگه می‌دارد و نیازی به تعیین نوع ندارد.</p>
+<pre><code>age = 20
+name = "Sara"
+price = 9.5
+age = age + 1</code></pre>
+<ul><li>نام متغیر با عدد شروع نمی‌شود و فاصله ندارد.</li><li>حروف بزرگ و کوچک فرق دارند.</li><li>از سبک <code>snake_case</code> استفاده کن: <code>my_name</code></li></ul></section>
+
+<section id="types" class="page glass" hidden><h2 class="t">انواع داده</h2>
+<table><tr><th>نوع</th><th>توضیح</th><th>مثال</th></tr>
+<tr><td><code>int</code></td><td>عدد صحیح</td><td><code>10</code></td></tr>
+<tr><td><code>float</code></td><td>عدد اعشاری</td><td><code>3.14</code></td></tr>
+<tr><td><code>str</code></td><td>متن</td><td><code>"hi"</code></td></tr>
+<tr><td><code>bool</code></td><td>درست یا غلط</td><td><code>True</code></td></tr></table>
+<pre><code>print(type(5))     # int
+print(int("12"))   # متن به عدد
+print(str(7))      # عدد به متن</code></pre></section>
+
+<section id="ops" class="page glass" hidden><h2 class="t">عملگرها</h2>
+<pre><code>+  -  *  /     # جمع، تفریق، ضرب، تقسیم
+//             # تقسیم صحیح (7 // 2 = 3)
+%              # باقی‌مانده (7 % 2 = 1)
+**             # توان (2 ** 3 = 8)
+==  !=  &gt;  &lt;  &gt;=  &lt;=
+and  or  not</code></pre></section>
+
+<section id="str" class="page glass" hidden><h2 class="t">رشته‌ها (متن)</h2>
+<pre><code>s = "python"
+print(len(s))        # 6
+print(s.upper())     # PYTHON
+print(s[0], s[-1])   # p n
+print(s[1:4])        # yth
+print(f"Hi {s}!")    # f-string</code></pre>
+<p>متدهای پرکاربرد: <code>lower</code>، <code>strip</code>، <code>replace</code>، <code>split</code>، <code>join</code></p></section>
+
+<section id="coll" class="page glass" hidden><h2 class="t">لیست، تاپل، دیکشنری، مجموعه</h2>
+<pre><code>fruits = ["apple", "banana"]   # list
+fruits.append("cherry")
+
+point = (3, 4)                 # tuple (ثابت)
+
+user = {"name": "Sara"}        # dict
+user["age"] = 20
+
+nums = {1, 2, 2, 3}            # set -> {1, 2, 3}</code></pre></section>
+
+<section id="cond" class="page glass" hidden><h2 class="t">شرط‌ها</h2>
+<p>تورفتگی ابتدای خط در پایتون مهم است و بلوک کد را مشخص می‌کند.</p>
+<pre><code>score = 85
+if score &gt;= 90:
+    print("عالی")
+elif score &gt;= 60:
+    print("قبول")
+else:
+    print("مردود")</code></pre></section>
+
+<section id="loop" class="page glass" hidden><h2 class="t">حلقه‌ها</h2>
+<pre><code>for i in range(5):     # 0 تا 4
+    print(i)
+
+n = 3
+while n &gt; 0:
+    print(n)
+    n -= 1</code></pre>
+<p>با <code>break</code> از حلقه خارج می‌شوی و با <code>continue</code> دور فعلی را رد می‌کنی.</p></section>
+
+<section id="func" class="page glass" hidden><h2 class="t">تابع‌ها</h2>
+<p>تابع بخشی از کد است که یک بار می‌نویسی و هر چندبار صدا می‌زنی.</p>
+<pre><code>def add(a, b=0):
+    return a + b
+
+print(add(2, 3))   # 5
+square = lambda x: x * x</code></pre></section>
+
+<section id="mod" class="page glass" hidden><h2 class="t">ماژول‌ها و کتابخانه‌ها</h2>
+<pre><code>import math
+print(math.sqrt(16))   # 4.0
+
+from random import randint
+print(randint(1, 10))</code></pre>
+<p>برای نصب کتابخانه‌های بیرونی از <code>pip</code> استفاده کن:</p>
+<pre><code>pip install requests</code></pre></section>
+
+<section id="file" class="page glass" hidden><h2 class="t">کار با فایل</h2>
+<pre><code>with open("note.txt", "w", encoding="utf-8") as f:
+    f.write("سلام")
+
+with open("note.txt", "r", encoding="utf-8") as f:
+    print(f.read())</code></pre>
+<p>حالت‌ها: <code>r</code> خواندن، <code>w</code> نوشتن، <code>a</code> اضافه‌کردن.</p></section>
+
+<section id="err" class="page glass" hidden><h2 class="t">مدیریت خطا</h2>
+<pre><code>try:
+    x = int(input("عدد: "))
+    print(10 / x)
+except ValueError:
+    print("عدد معتبر وارد کن")
+except ZeroDivisionError:
+    print("تقسیم بر صفر ممکن نیست")
+finally:
+    print("پایان")</code></pre></section>
+
+<section id="oop" class="page glass" hidden><h2 class="t">آشنایی با شی‌گرایی</h2>
+<p>کلاس یک قالب است و شیء نمونه‌ای ساخته‌شده از آن قالب.</p>
+<pre><code>class Cat:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        print(self.name, "میومیو")
+
+Cat("Mini").speak()</code></pre></section>
+
+<section id="tips" class="page glass" hidden><h2 class="t">نکات و مسیر یادگیری</h2>
+<ul><li>هر روز کمی کد بنویس؛ تمرین از حفظ‌کردن مهم‌تر است.</li><li>پیام خطا را با دقت بخوان، معمولاً راه حل را می‌گوید.</li><li>پروژه‌ی کوچک بساز: ماشین‌حساب، حدس عدد، لیست کارها.</li><li>با <code>help(print)</code> راهنمای هر تابع را ببین.</li><li>بعد از مبتدی: pandas، Flask و Django.</li></ul></section>
+</main>
+
+<footer class="glass">
+<svg class="mini"><use href="#fl"/></svg>
+<div class="fl"><a href="#home">خانه</a><a href="#install">نصب</a><a href="#first">اولین برنامه</a><a href="#func">تابع‌ها</a><a href="#tips">نکات</a></div>
+<small>آموزش پایتون برای مبتدی‌ها · با ❀ ساخته شده</small>
+</footer>
+
+<script>
+var T={home:["#ffd6e8","#ffb3d1","#ffe4ef","#d6336c","#ff7eb6"],intro:["#ffe0ec","#ffc2d6","#fff0f5","#c2255c","#ff8fb1"],
+install:["#ffe3d3","#ffc3a8","#fff1e8","#d9480f","#ff9a76"],first:["#ecdcff","#d0b8f5","#f6eeff","#7048b8","#b197fc"],
+vars:["#ffd9d6","#ffa8a0","#ffeceb","#e03131","#ff8787"],types:["#fbd0f0","#f3a0dc","#fde8f8","#a61e8c","#e599f7"],
+ops:["#fff0e0","#ffd7b5","#fff8ef","#c2590a","#ffc078"],str:["#f0dbe6","#d9b3c9","#f8eef3","#8a3a66","#c58aa8"],
+coll:["#ffd0dc","#ff9fb8","#ffe6ec","#b0143f","#ff6b8f"],cond:["#f3d9fa","#e0b0f0","#faeefd","#9c36b5","#da77f2"],
+loop:["#ffddd0","#ffb59a","#fff0ea","#c2410c","#ffa383"],func:["#ffd1e8","#ff9ad0","#ffe8f4","#c2185b","#f06595"],
+mod:["#f7dfd8","#e9b8aa","#fbf0ec","#a6452c","#e8a598"],file:["#ffe0f0","#cdd9ff","#f4eeff","#5f3dc4","#a5b4fc"],
+err:["#ffd0d6","#ff8fa3","#ffe5e9","#c92a2a","#fa5252"],oop:["#ecd0f0","#cf9ae0","#f6e6fa","#862e9c","#cc5de8"],
+tips:["#ffe8cc","#ffc9d6","#fff4e6","#d6336c","#ffa8a8"]};
+var N={intro:"معرفی",install:"نصب",first:"اولین برنامه",vars:"متغیر",types:"انواع داده",ops:"عملگرها",str:"رشته‌ها",coll:"مجموعه‌ها",cond:"شرط",loop:"حلقه",func:"تابع",mod:"ماژول",file:"فایل",err:"خطا",oop:"شی‌گرایی",tips:"نکات"};
+var ids=Object.keys(N),nav=document.getElementById("nav"),pages=document.querySelectorAll(".page");
+ids.forEach(function(k){var a=document.createElement("a");a.href="#"+k;a.textContent=N[k];a.dataset.k=k;nav.appendChild(a)});
+ids.forEach(function(k,i){var s=document.getElementById(k),p=ids[i-1],n=ids[i+1],d=document.createElement("div");d.className="pn";
+d.innerHTML='<a href="#'+(p||"home")+'">→ '+(p?N[p]:"خانه")+'</a>'+(n?'<a href="#'+n+'">'+N[n]+' ←</a>':'<a href="#home">خانه ←</a>');s.appendChild(d)});
+function go(){var id=location.hash.slice(1)||"home";if(!T[id])id="home";
+pages.forEach(function(p){p.hidden=p.id!==id});var c=T[id],r=document.documentElement.style;
+["--c1","--c2","--c3","--accent","--blob"].forEach(function(v,i){r.setProperty(v,c[i])});
+nav.querySelectorAll("a").forEach(function(a){var on=(a.dataset.k||"home")===id&&!a.classList.contains("brand")||(a.classList.contains("brand")&&id==="home");a.classList.toggle("on",on&&!a.classList.contains("brand"))});
+var cur=nav.querySelector("a.on");if(cur)cur.scrollIntoView({inline:"center",block:"nearest"});window.scrollTo(0,0)}
+addEventListener("hashchange",go);go();
+var sl=document.getElementById("sl"),S=sl.querySelectorAll(".slide"),D=sl.querySelector(".dots"),cur=0,tm;
+S.forEach(function(_,i){var d=document.createElement("i");d.onclick=function(){show(i)};D.appendChild(d)});
+function show(i){cur=(i+S.length)%S.length;S.forEach(function(s,j){s.classList.toggle("on",j===cur)});
+D.querySelectorAll("i").forEach(function(d,j){d.classList.toggle("on",j===cur)});clearInterval(tm);tm=setInterval(function(){show(cur+1)},5500)}
+sl.querySelector(".prev").onclick=function(){show(cur+1)};sl.querySelector(".next").onclick=function(){show(cur-1)};show(0);
+</script>
+</body>
+</html>
