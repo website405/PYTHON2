@@ -132,7 +132,13 @@ print(str(7))      # عدد به متن</code></pre></section>
 %              # باقی‌مانده (7 % 2 = 1)
 **             # توان (2 ** 3 = 8)
 ==  !=  &gt;  &lt;  &gt;=  &lt;=
-and  or  not</code></pre></section>
+and  or  not</code></pre>
+<p>اولویت اجرا: ابتدا <code>**</code>، بعد <code>* / // %</code>، بعد <code>+ -</code>، بعد مقایسه‌ها و در آخر <code>not</code>، <code>and</code>، <code>or</code>. برای شک نکردن از پرانتز استفاده کن.</p>
+<pre><code>print(2 + 3 * 4)     # 14
+print((2 + 3) * 4)   # 20
+x = 10
+x += 5               # x = x + 5
+print(x &gt; 3 and x &lt; 20)   # True</code></pre></section>
 
 <section id="str" class="page glass" hidden><h2 class="t">رشته‌ها (متن)</h2>
 <pre><code>s = "python"
@@ -141,6 +147,13 @@ print(s.upper())     # PYTHON
 print(s[0], s[-1])   # p n
 print(s[1:4])        # yth
 print(f"Hi {s}!")    # f-string</code></pre>
+<pre><code>t = "  Hello World  "
+print(t.strip())             # حذف فاصله‌های اطراف
+print(t.replace("World", "Py"))
+print("a,b,c".split(","))     # ['a', 'b', 'c']
+print("-".join(["x", "y"]))   # x-y
+print("py" in "python")      # True
+print("hello".title())       # Hello</code></pre>
 <p>متدهای پرکاربرد: <code>lower</code>، <code>strip</code>، <code>replace</code>، <code>split</code>، <code>join</code></p></section>
 
 <section id="coll" class="page glass" hidden><h2 class="t">لیست، تاپل، دیکشنری، مجموعه</h2>
@@ -152,7 +165,22 @@ point = (3, 4)                 # tuple (ثابت)
 user = {"name": "Sara"}        # dict
 user["age"] = 20
 
-nums = {1, 2, 2, 3}            # set -> {1, 2, 3}</code></pre></section>
+nums = {1, 2, 2, 3}            # set -> {1, 2, 3}</code></pre>
+<p>متدهای مهم لیست و دیکشنری:</p>
+<pre><code>a = [3, 1, 2]
+a.sort()            # [1, 2, 3]
+a.insert(0, 9)      # افزودن در جای دلخواه
+a.remove(2)         # حذف یک مقدار
+a.pop()             # حذف و برگرداندن آخری
+print(len(a), 9 in a)
+
+d = {"x": 1, "y": 2}
+print(d.get("z", 0))        # بدون خطا، پیش‌فرض 0
+for k, v in d.items():
+    print(k, v)
+del d["x"]
+print(list(d.keys()))</code></pre>
+<p>تفاوت‌ها: لیست مرتب و قابل تغییر است، تاپل مرتب ولی ثابت، دیکشنری کلید و مقدار دارد و مجموعه تکراری قبول نمی‌کند.</p></section>
 
 <section id="cond" class="page glass" hidden><h2 class="t">شرط‌ها</h2>
 <p>تورفتگی ابتدای خط در پایتون مهم است و بلوک کد را مشخص می‌کند.</p>
@@ -172,6 +200,20 @@ n = 3
 while n &gt; 0:
     print(n)
     n -= 1</code></pre>
+<pre><code>for i, name in enumerate(["a", "b"], start=1):
+    print(i, name)          # 1 a  /  2 b
+
+for i in range(1, 4):
+    for j in range(1, 4):   # حلقه تو در تو
+        print(i * j, end=" ")
+    print()
+
+for i in range(10):
+    if i == 3:
+        continue
+    if i == 6:
+        break
+    print(i)</code></pre>
 <p>با <code>break</code> از حلقه خارج می‌شوی و با <code>continue</code> دور فعلی را رد می‌کنی.</p></section>
 
 <section id="func" class="page glass" hidden><h2 class="t">تابع‌ها</h2>
@@ -180,7 +222,22 @@ while n &gt; 0:
     return a + b
 
 print(add(2, 3))   # 5
-square = lambda x: x * x</code></pre></section>
+square = lambda x: x * x</code></pre>
+<pre><code>def total(*nums):          # تعداد ورودی دلخواه
+    return sum(nums)
+
+def info(**kw):            # ورودی‌های نام‌دار
+    print(kw)
+
+print(total(1, 2, 3))      # 6
+info(name="Ali", age=9)
+
+def div(a, b):
+    """تقسیم دو عدد"""      # docstring: توضیح تابع
+    return a / b, a // b   # چند مقدار برگشتی
+
+q, r = div(7, 2)</code></pre>
+<p>متغیری که داخل تابع ساخته شود فقط همان‌جا دیده می‌شود (محدوده‌ی محلی).</p></section>
 
 <section id="mod" class="page glass" hidden><h2 class="t">ماژول‌ها و کتابخانه‌ها</h2>
 <pre><code>import math
@@ -189,7 +246,15 @@ print(math.sqrt(16))   # 4.0
 from random import randint
 print(randint(1, 10))</code></pre>
 <p>برای نصب کتابخانه‌های بیرونی از <code>pip</code> استفاده کن:</p>
-<pre><code>pip install requests</code></pre></section>
+<pre><code>pip install requests</code></pre>
+<p>ماژول‌های آماده‌ی پرکاربرد: <code>math</code> (ریاضی)، <code>random</code> (تصادفی)، <code>datetime</code> (تاریخ و زمان)، <code>os</code> (سیستم‌عامل)، <code>json</code> (داده‌ی جیسون)، <code>time</code> (زمان‌سنجی).</p>
+<pre><code>from datetime import datetime
+print(datetime.now().year)
+
+import json
+text = json.dumps({"a": 1})
+print(json.loads(text))</code></pre>
+<p>هر فایل پایتون خودش یک ماژول است؛ با <code>import myfile</code> می‌توانی در فایل دیگر استفاده‌اش کنی.</p></section>
 
 <section id="file" class="page glass" hidden><h2 class="t">کار با فایل</h2>
 <pre><code>with open("note.txt", "w", encoding="utf-8") as f:
@@ -223,6 +288,108 @@ Cat("Mini").speak()</code></pre></section>
 
 <section id="tips" class="page glass" hidden><h2 class="t">نکات و مسیر یادگیری</h2>
 <ul><li>هر روز کمی کد بنویس؛ تمرین از حفظ‌کردن مهم‌تر است.</li><li>پیام خطا را با دقت بخوان، معمولاً راه حل را می‌گوید.</li><li>پروژه‌ی کوچک بساز: ماشین‌حساب، حدس عدد، لیست کارها.</li><li>با <code>help(print)</code> راهنمای هر تابع را ببین.</li><li>بعد از مبتدی: pandas، Flask و Django.</li></ul></section>
+<section id="built" class="page glass" hidden><h2 class="t">توابع آماده پایتون</h2>
+<p>پایتون ده‌ها تابع آماده دارد که بدون import کار می‌کنند.</p>
+<table><tr><th>تابع</th><th>کار</th></tr>
+<tr><td><code>len(x)</code></td><td>تعداد اعضا یا حروف</td></tr>
+<tr><td><code>sum(x)</code></td><td>جمع اعضا</td></tr>
+<tr><td><code>min / max</code></td><td>کوچک‌ترین و بزرگ‌ترین</td></tr>
+<tr><td><code>sorted(x)</code></td><td>مرتب‌شده‌ی جدید</td></tr>
+<tr><td><code>abs(x)</code></td><td>قدر مطلق</td></tr>
+<tr><td><code>round(x, n)</code></td><td>گرد کردن</td></tr>
+<tr><td><code>zip(a, b)</code></td><td>جفت کردن دو فهرست</td></tr>
+<tr><td><code>type / isinstance</code></td><td>بررسی نوع</td></tr></table>
+<pre><code>nums = [5, 2, 9]
+print(len(nums), sum(nums), min(nums), max(nums))
+print(sorted(nums, reverse=True))   # [9, 5, 2]
+print(round(3.14159, 2))            # 3.14
+for a, b in zip([1, 2], ["x", "y"]):
+    print(a, b)
+print(isinstance(3, int))           # True</code></pre></section>
+
+<section id="comp" class="page glass" hidden><h2 class="t">لیست‌نویسی فشرده</h2>
+<p>List comprehension راهی کوتاه برای ساختن لیست در یک خط است.</p>
+<pre><code>squares = [x * x for x in range(1, 6)]
+print(squares)                  # [1, 4, 9, 16, 25]
+
+evens = [x for x in range(10) if x % 2 == 0]
+print(evens)                    # [0, 2, 4, 6, 8]
+
+words = ["a", "bb", "ccc"]
+lens = {w: len(w) for w in words}   # دیکشنری فشرده
+print(lens)
+
+unique = {x % 3 for x in range(10)}  # مجموعه‌ی فشرده</code></pre>
+<p>برش لیست‌ها (Slicing):</p>
+<pre><code>a = [10, 20, 30, 40, 50]
+print(a[1:4])    # [20, 30, 40]
+print(a[::2])    # [10, 30, 50]
+print(a[::-1])   # برعکس</code></pre></section>
+
+<section id="ex" class="page glass" hidden><h2 class="t">تمرین‌ها</h2>
+<p>اول خودت حل کن، بعد جواب را ببین.</p>
+<ul><li>۱. برنامه‌ای بنویس که نام و سن بگیرد و بگوید ده سال دیگر چند ساله‌ای.</li><li>۲. زوج یا فرد بودن یک عدد را تشخیص بده.</li><li>۳. اعداد ۱ تا ۱۰۰ را جمع بزن.</li><li>۴. بزرگ‌ترین عدد در یک لیست را بدون <code>max</code> پیدا کن.</li><li>۵. جدول ضرب یک عدد را چاپ کن.</li><li>۶. بررسی کن یک متن پالیندروم (مثل level) هست یا نه.</li><li>۷. تعداد حروف صدادار یک جمله را بشمار.</li><li>۸. تابعی بنویس که فاکتوریل بگیرد.</li></ul>
+<p>جواب تمرین‌های ۲، ۳ و ۶:</p>
+<pre><code>n = int(input())
+print("even" if n % 2 == 0 else "odd")
+
+print(sum(range(1, 101)))   # 5050
+
+s = "level"
+print(s == s[::-1])         # True</code></pre></section>
+
+<section id="proj" class="page glass" hidden><h2 class="t">پروژه‌های کوچک</h2>
+<p>۱. بازی حدس عدد:</p>
+<pre><code>import random
+secret = random.randint(1, 20)
+while True:
+    g = int(input("Guess: "))
+    if g &lt; secret:
+        print("higher")
+    elif g &gt; secret:
+        print("lower")
+    else:
+        print("You got it!")
+        break</code></pre>
+<p>۲. لیست کارها:</p>
+<pre><code>tasks = []
+while True:
+    cmd = input("add / show / quit: ")
+    if cmd == "add":
+        tasks.append(input("Task: "))
+    elif cmd == "show":
+        for i, t in enumerate(tasks, 1):
+            print(i, t)
+    elif cmd == "quit":
+        break</code></pre>
+<p>۳. ماشین‌حساب ساده:</p>
+<pre><code>a = float(input("a: "))
+op = input("+ - * / : ")
+b = float(input("b: "))
+if op == "+": print(a + b)
+elif op == "-": print(a - b)
+elif op == "*": print(a * b)
+elif op == "/": print(a / b if b else "error")</code></pre></section>
+
+<section id="mist" class="page glass" hidden><h2 class="t">خطاهای رایج</h2>
+<p>خطا دشمن تو نیست؛ دقیقاً می‌گوید مشکل کجاست. خط آخر پیام را بخوان.</p>
+<table><tr><th>خطا</th><th>معنی و راه حل</th></tr>
+<tr><td><code>SyntaxError</code></td><td>نوشتار اشتباه؛ <code>:</code> یا پرانتز را چک کن</td></tr>
+<tr><td><code>IndentationError</code></td><td>تورفتگی نادرست؛ ۴ فاصله بگذار</td></tr>
+<tr><td><code>NameError</code></td><td>متغیر تعریف نشده یا غلط تایپی</td></tr>
+<tr><td><code>TypeError</code></td><td>نوع‌ها نمی‌خوانند (مثلاً عدد + متن)</td></tr>
+<tr><td><code>ValueError</code></td><td>مقدار نامناسب، مثل <code>int("abc")</code></td></tr>
+<tr><td><code>IndexError</code></td><td>شماره‌ی خارج از لیست</td></tr>
+<tr><td><code>KeyError</code></td><td>کلید در دیکشنری نیست؛ از <code>get</code> استفاده کن</td></tr>
+<tr><td><code>ZeroDivisionError</code></td><td>تقسیم بر صفر</td></tr></table>
+<pre><code>if x = 5:      # اشتباه: = یعنی مقداردهی
+if x == 5:     # درست: == یعنی مقایسه
+
+print("age: " + 20)        # TypeError
+print("age: " + str(20))   # درست
+
+input("n: ") + 1           # ورودی همیشه متن است
+int(input("n: ")) + 1      # درست</code></pre></section>
 </main>
 
 <footer class="glass">
@@ -240,8 +407,8 @@ coll:["#ffd0dc","#ff9fb8","#ffe6ec","#b0143f","#ff6b8f"],cond:["#f3d9fa","#e0b0f
 loop:["#ffddd0","#ffb59a","#fff0ea","#c2410c","#ffa383"],func:["#ffd1e8","#ff9ad0","#ffe8f4","#c2185b","#f06595"],
 mod:["#f7dfd8","#e9b8aa","#fbf0ec","#a6452c","#e8a598"],file:["#ffe0f0","#cdd9ff","#f4eeff","#5f3dc4","#a5b4fc"],
 err:["#ffd0d6","#ff8fa3","#ffe5e9","#c92a2a","#fa5252"],oop:["#ecd0f0","#cf9ae0","#f6e6fa","#862e9c","#cc5de8"],
-tips:["#ffe8cc","#ffc9d6","#fff4e6","#d6336c","#ffa8a8"]};
-var N={intro:"معرفی",install:"نصب",first:"اولین برنامه",vars:"متغیر",types:"انواع داده",ops:"عملگرها",str:"رشته‌ها",coll:"مجموعه‌ها",cond:"شرط",loop:"حلقه",func:"تابع",mod:"ماژول",file:"فایل",err:"خطا",oop:"شی‌گرایی",tips:"نکات"};
+built:["#ffd9e6","#ffb0c8","#ffeef3","#b8325f","#ff8fab"],comp:["#e8dcff","#f5b5da","#f7eeff","#8e3fa8","#d0a2f7"],ex:["#ffe5d0","#ffb7b7","#fff3ea","#cf4a22","#ffb08a"],proj:["#ffd6f0","#e9a8d8","#ffeaf8","#b02e86","#f78fd0"],mist:["#ffd4dc","#ff9eae","#ffe9ed","#b8182f","#ff7a8e"],tips:["#ffe8cc","#ffc9d6","#fff4e6","#d6336c","#ffa8a8"]};
+var N={intro:"معرفی",install:"نصب",first:"اولین برنامه",vars:"متغیر",types:"انواع داده",ops:"عملگرها",str:"رشته‌ها",coll:"مجموعه‌ها",cond:"شرط",loop:"حلقه",func:"تابع",mod:"ماژول",file:"فایل",err:"خطا",oop:"شی‌گرایی",built:"توابع آماده",comp:"لیست‌نویسی",ex:"تمرین‌ها",proj:"پروژه‌ها",mist:"خطاهای رایج",tips:"نکات"};
 var ids=Object.keys(N),nav=document.getElementById("nav"),pages=document.querySelectorAll(".page");
 ids.forEach(function(k){var a=document.createElement("a");a.href="#"+k;a.textContent=N[k];a.dataset.k=k;nav.appendChild(a)});
 ids.forEach(function(k,i){var s=document.getElementById(k),p=ids[i-1],n=ids[i+1],d=document.createElement("div");d.className="pn";
