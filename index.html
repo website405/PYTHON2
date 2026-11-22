@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
---c1:#ffd6e8;--c2:#ffb3d1;--c3:#ffe4ef;--accent:#d6336c;--blob:#ff7eb6;
+--c1:#ffe3ec;--c2:#fbc1d3;--c3:#fff1f5;--accent:#d94f7a;--blob:#f48fb1;
 --text:#4a1d35;--soft:#8a4a68;--glass:rgba(255,255,255,.5);--glass-b:rgba(255,255,255,.75);--code-bg:rgba(60,20,45,.9);--code:#ffe4ef;--veil:transparent}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--text:#ffe9f2;--soft:#f3b5d0;--glass:rgba(30,8,22,.45);--glass-b:rgba(255,255,255,.18);--code-bg:rgba(0,0,0,.5);--veil:rgba(25,6,18,.62)}}
 :root[data-theme="dark"]{--text:#ffe9f2;--soft:#f3b5d0;--glass:rgba(30,8,22,.45);--glass-b:rgba(255,255,255,.18);--code-bg:rgba(0,0,0,.5);--veil:rgba(25,6,18,.62)}
@@ -23,6 +23,11 @@ nav a{color:var(--text);text-decoration:none;font-size:.85rem;padding:2px 11px;b
 nav a:hover{background:var(--glass-b)}
 nav a.on{background:var(--accent);color:#fff}
 nav .brand{font-weight:800;color:var(--accent);display:flex;align-items:center;gap:6px;margin-inline-end:6px}
+.mbtn{margin-inline-start:auto;border:0;background:var(--accent);color:#fff;border-radius:999px;padding:2px 14px;font:inherit;font-size:.85rem;cursor:pointer;white-space:nowrap}
+.menu{position:fixed;z-index:11;top:calc(env(safe-area-inset-top,0px) + 72px);left:0;right:0;margin:0 auto;width:calc(100% - 28px);max-width:1000px;padding:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px;max-height:70vh;overflow:auto}
+.menu[hidden]{display:none}
+.menu a{color:var(--text);text-decoration:none;font-size:.88rem;padding:4px 12px;border-radius:12px;background:var(--glass-b);text-align:center}
+.menu a.on{background:var(--accent);color:#fff}
 main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 14px 30px}
 .flower{width:120px;height:120px;animation:spin 14s linear infinite;filter:drop-shadow(0 6px 10px rgba(0,0,0,.2))}
 .mini{width:26px;height:26px;animation:spin 14s linear infinite}
@@ -33,10 +38,10 @@ main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 14px 3
 .slide.on{opacity:1;pointer-events:auto}
 .slide h1,.slide h2{font-size:1.8rem;margin:8px 0;font-weight:800}
 .slide p{margin:0 0 14px;color:var(--soft)}
-.s1{background:linear-gradient(135deg,rgba(255,126,182,.35),rgba(255,214,232,.2))}
-.s2{background:linear-gradient(135deg,rgba(255,163,131,.4),rgba(255,230,210,.2))}
-.s3{background:linear-gradient(135deg,rgba(177,151,252,.4),rgba(255,214,240,.2))}
-.s4{background:linear-gradient(135deg,rgba(240,101,149,.4),rgba(255,224,200,.2))}
+.s1{background:linear-gradient(135deg,rgba(244,143,177,.38),rgba(255,227,236,.2))}
+.s2{background:linear-gradient(135deg,rgba(246,160,138,.4),rgba(255,230,222,.2))}
+.s3{background:linear-gradient(135deg,rgba(243,170,119,.4),rgba(255,236,214,.2))}
+.s4{background:linear-gradient(135deg,rgba(232,180,110,.42),rgba(255,240,217,.2))}
 .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:6px 22px;border-radius:999px;font-size:.95rem}
 .arr{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid var(--glass-b);background:var(--glass-b);color:var(--text);font-size:1.2rem;cursor:pointer}
 .prev{right:12px}.next{left:12px}
@@ -63,17 +68,18 @@ footer small{color:var(--soft)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="fl" viewBox="0 0 100 100">
-<g fill="#ff8fbf" stroke="#fff" stroke-width="1" fill-opacity=".92">
-<ellipse cx="50" cy="24" rx="10" ry="20"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(45 50 50)" fill="#ff6fa8"/>
-<ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(90 50 50)"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(135 50 50)" fill="#ff6fa8"/>
-<ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(225 50 50)" fill="#ff6fa8"/>
-<ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(270 50 50)"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(315 50 50)" fill="#ff6fa8"/></g>
-<circle cx="50" cy="50" r="11" fill="#ffd54f" stroke="#fff" stroke-width="1.5"/></symbol></svg>
+<g fill="#f7a9c0" stroke="#fff" stroke-width="1" fill-opacity=".92">
+<ellipse cx="50" cy="24" rx="10" ry="20"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(45 50 50)" fill="#ee83a5"/>
+<ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(90 50 50)"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(135 50 50)" fill="#ee83a5"/>
+<ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(225 50 50)" fill="#ee83a5"/>
+<ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(270 50 50)"/><ellipse cx="50" cy="24" rx="10" ry="20" transform="rotate(315 50 50)" fill="#ee83a5"/></g>
+<circle cx="50" cy="50" r="11" fill="#f6c77d" stroke="#fff" stroke-width="1.5"/></symbol></svg>
 <div class="blob b1"></div><div class="blob b2"></div>
 
 <nav class="glass" id="nav">
 <a class="brand" href="#home"><svg class="mini"><use href="#fl"/></svg>پایتون</a>
 </nav>
+<div class="menu glass" id="menu" hidden></div>
 
 <main>
 <div id="home" class="page">
@@ -87,7 +93,7 @@ footer small{color:var(--soft)}
   </div>
   <section class="about glass">
     <h2 class="t">اینجا چی یاد می‌گیری؟</h2>
-    <p>یک راهنمای کوتاه و مرتب برای شروع پایتون. از منوی بالا هر مبحث را بزن تا به صفحه‌ی مخصوص خودش بروی؛ هر صفحه رنگ و حال‌وهوای خودش را دارد.</p>
+    <p>همه‌ی مبحث‌های پایتون برای مبتدی‌ها، قدم‌به‌قدم و با مثال.</p>
   </section>
 </div>
 
@@ -394,29 +400,24 @@ int(input("n: ")) + 1      # درست</code></pre></section>
 
 <footer class="glass">
 <svg class="mini"><use href="#fl"/></svg>
-<div class="fl"><a href="#home">خانه</a><a href="#install">نصب</a><a href="#first">اولین برنامه</a><a href="#func">تابع‌ها</a><a href="#tips">نکات</a></div>
 <small>آموزش پایتون برای مبتدی‌ها · با ❀ ساخته شده</small>
 </footer>
 
 <script>
-var T={home:["#ffd6e8","#ffb3d1","#ffe4ef","#d6336c","#ff7eb6"],intro:["#ffe0ec","#ffc2d6","#fff0f5","#c2255c","#ff8fb1"],
-install:["#ffe3d3","#ffc3a8","#fff1e8","#d9480f","#ff9a76"],first:["#ecdcff","#d0b8f5","#f6eeff","#7048b8","#b197fc"],
-vars:["#ffd9d6","#ffa8a0","#ffeceb","#e03131","#ff8787"],types:["#fbd0f0","#f3a0dc","#fde8f8","#a61e8c","#e599f7"],
-ops:["#fff0e0","#ffd7b5","#fff8ef","#c2590a","#ffc078"],str:["#f0dbe6","#d9b3c9","#f8eef3","#8a3a66","#c58aa8"],
-coll:["#ffd0dc","#ff9fb8","#ffe6ec","#b0143f","#ff6b8f"],cond:["#f3d9fa","#e0b0f0","#faeefd","#9c36b5","#da77f2"],
-loop:["#ffddd0","#ffb59a","#fff0ea","#c2410c","#ffa383"],func:["#ffd1e8","#ff9ad0","#ffe8f4","#c2185b","#f06595"],
-mod:["#f7dfd8","#e9b8aa","#fbf0ec","#a6452c","#e8a598"],file:["#ffe0f0","#cdd9ff","#f4eeff","#5f3dc4","#a5b4fc"],
-err:["#ffd0d6","#ff8fa3","#ffe5e9","#c92a2a","#fa5252"],oop:["#ecd0f0","#cf9ae0","#f6e6fa","#862e9c","#cc5de8"],
-built:["#ffd9e6","#ffb0c8","#ffeef3","#b8325f","#ff8fab"],comp:["#e8dcff","#f5b5da","#f7eeff","#8e3fa8","#d0a2f7"],ex:["#ffe5d0","#ffb7b7","#fff3ea","#cf4a22","#ffb08a"],proj:["#ffd6f0","#e9a8d8","#ffeaf8","#b02e86","#f78fd0"],mist:["#ffd4dc","#ff9eae","#ffe9ed","#b8182f","#ff7a8e"],tips:["#ffe8cc","#ffc9d6","#fff4e6","#d6336c","#ffa8a8"]};
+var T={home:["#ffe3ec","#fbc1d3","#fff1f5","#d94f7a","#f48fb1"],intro:["#ffe6ee","#f9b8cb","#fff3f6","#c9406d","#f59ab5"],install:["#ffe4e6","#f8b4c0","#fff2f3","#c43d5c","#f28fa3"],first:["#ffe5e2","#f7b0b0","#fff2f0","#c2444a","#f59a9a"],vars:["#ffe6e0","#f9b9a6","#fff3ef","#c4492f","#f6a08a"],types:["#ffe8dc","#f9bfa0","#fff4ee","#c0522a","#f5a47e"],ops:["#ffead8","#f8c49a","#fff5ec","#b8561f","#f3aa77"],str:["#ffecd6","#f6c796","#fff6ea","#b0591a","#f0b070"],coll:["#fff0d9","#f3cd96","#fff7ea","#a8601a","#e8b46e"],cond:["#fff1dc","#efcf9c","#fff8ec","#a0621f","#e3b878"],loop:["#ffe9e3","#f4bba9","#fff4f0","#b44a35","#eca08c"],func:["#ffe3ea","#f4aabf","#fff1f5","#c23868","#ee8cab"],mod:["#ffe9dd","#f2b9a1","#fff4ee","#b5503a","#e9a28b"],file:["#f9e3e6","#e8b4bd","#fdf1f3","#a8435a","#d98a9b"],err:["#ffe0e4","#f5a3b3","#fff0f2","#c0304f","#ee7f96"],oop:["#ffe6ec","#f2b0c4","#fff2f6","#b83a66","#e888a8"],built:["#ffeadf","#f6c2a8","#fff5ef","#b85a2d","#f0a77e"],comp:["#fde4e9","#eeb1bf","#fef1f4","#b03a5b","#e189a0"],ex:["#ffecd8","#f7c8a0","#fff6ec","#b45f1e","#f0b07a"],proj:["#ffe4ea","#f6aec0","#fff1f4","#c53a66","#ef8aa8"],mist:["#ffe1e1","#f4a8a8","#fff0f0","#c0392b","#ee8a84"],tips:["#fff0d6","#f4cc92","#fff7e8","#a85f16","#e9b36a"]};
 var N={intro:"معرفی",install:"نصب",first:"اولین برنامه",vars:"متغیر",types:"انواع داده",ops:"عملگرها",str:"رشته‌ها",coll:"مجموعه‌ها",cond:"شرط",loop:"حلقه",func:"تابع",mod:"ماژول",file:"فایل",err:"خطا",oop:"شی‌گرایی",built:"توابع آماده",comp:"لیست‌نویسی",ex:"تمرین‌ها",proj:"پروژه‌ها",mist:"خطاهای رایج",tips:"نکات"};
 var ids=Object.keys(N),nav=document.getElementById("nav"),pages=document.querySelectorAll(".page");
-ids.forEach(function(k){var a=document.createElement("a");a.href="#"+k;a.textContent=N[k];a.dataset.k=k;nav.appendChild(a)});
+var MAIN=["intro","install","first","ex"],menu=document.getElementById("menu");
+MAIN.forEach(function(k){var a=document.createElement("a");a.href="#"+k;a.textContent=N[k];a.dataset.k=k;nav.appendChild(a)});
+var mb=document.createElement("button");mb.className="mbtn";mb.textContent="همه‌ی مباحث ☰";mb.onclick=function(){menu.hidden=!menu.hidden};nav.appendChild(mb);
+ids.forEach(function(k){var a=document.createElement("a");a.href="#"+k;a.textContent=N[k];a.dataset.k=k;menu.appendChild(a)});
+document.addEventListener("click",function(e){if(!menu.contains(e.target)&&e.target!==mb)menu.hidden=true});
 ids.forEach(function(k,i){var s=document.getElementById(k),p=ids[i-1],n=ids[i+1],d=document.createElement("div");d.className="pn";
 d.innerHTML='<a href="#'+(p||"home")+'">→ '+(p?N[p]:"خانه")+'</a>'+(n?'<a href="#'+n+'">'+N[n]+' ←</a>':'<a href="#home">خانه ←</a>');s.appendChild(d)});
 function go(){var id=location.hash.slice(1)||"home";if(!T[id])id="home";
 pages.forEach(function(p){p.hidden=p.id!==id});var c=T[id],r=document.documentElement.style;
 ["--c1","--c2","--c3","--accent","--blob"].forEach(function(v,i){r.setProperty(v,c[i])});
-nav.querySelectorAll("a").forEach(function(a){var on=(a.dataset.k||"home")===id&&!a.classList.contains("brand")||(a.classList.contains("brand")&&id==="home");a.classList.toggle("on",on&&!a.classList.contains("brand"))});
+document.querySelectorAll("#nav a,#menu a").forEach(function(a){a.classList.toggle("on",a.dataset.k===id)});menu.hidden=true;
 var cur=nav.querySelector("a.on");if(cur)cur.scrollIntoView({inline:"center",block:"nearest"});window.scrollTo(0,0)}
 addEventListener("hashchange",go);go();
 var sl=document.getElementById("sl"),S=sl.querySelectorAll(".slide"),D=sl.querySelector(".dots"),cur=0,tm;
